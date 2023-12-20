@@ -69,7 +69,7 @@ public class HTTPserver extends Thread{
 
         } else {
             System.out.println("Il file richiesto non esiste, quindi invio errore");
-            File fileErr = new File("HTTPserver-mureddu-main/src/resources/errorPage/error404.html");
+            File fileErr = new File("6-HTTPserver-mureddu-main/src/resources/errorPage/error404.html");
 
             // Se il file non esiste, invia la pagina per mostrare error 404
             out.write("HTTP/1.1 404 Not Found\r\n".getBytes());
@@ -92,14 +92,25 @@ public class HTTPserver extends Thread{
         String[] ar = file.getName().split("[.]");           
         String extension = ar[1];
         System.out.println("estensione: "+ extension);
-        if (extension.equals("css")){
-            contType = "text/css";
-        }else if (extension.equals("js")){
-            contType = "text/javascript";
-        }else if (extension.equals("html")){
-            contType = "text/html";
-        }else{
-            contType = "image/"+extension;
+        switch (extension) {
+            case "css":
+                contType = "text/css";
+                break;
+            case "js":
+                contType = "text/javascript";
+                break;
+            case "html":
+                contType = "text/html";
+                break;
+            case "xml":
+                contType = "application/xml";
+                break;
+            case "json":
+                contType = "application/json";
+                break;
+            default:
+                contType = "image/"+extension;
+                break;
         }
         return contType;
     }
